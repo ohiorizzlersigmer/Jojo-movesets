@@ -147,7 +147,7 @@ While True Do
      Vfx.Position = char.Torso.Postition
      Vfx.Transparency = 0.85
      Local Texture = Insert.new(“Decal”)
-     Texture.id = --18787705765
+     Texture.id = -- 18787705765
      Texture.Parent = Vfx
 End
 local Anim = Humanoid:LoadAnimation(AnimAnim)
