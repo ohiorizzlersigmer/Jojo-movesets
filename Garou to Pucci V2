@@ -854,7 +854,7 @@ local function bindTeleportLogic(tool)
 end
 
 
-local tool = createTool("Ultimate Movemeny") 
+local tool = createTool("Ultimate Movement") 
 bindTeleportLogic(tool)
 
 
@@ -869,10 +869,10 @@ local teleportAnimation = Instance.new("Animation")
 teleportAnimation.AnimationId = "rbxassetid://15957361339"
 
 
-local teleportDistance = 80
+local teleportDistance = 500
 
 
-local cooldownTime = 2 
+local cooldownTime = 0 
 local isOnCooldown = false
 local originalToolName = tool.Name
 
@@ -989,7 +989,7 @@ tool.Parent = player.Backpack
 local animationTrack
 local stopAnimationTrack
 local moveConnection
-local moveSpeed = 350
+local moveSpeed = 250
 local initialSpeed = 0.5
 local speed = initialSpeed
 local elapsedTime = 0
