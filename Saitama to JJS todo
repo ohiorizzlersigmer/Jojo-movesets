@@ -1,0 +1,147 @@
+-- //MOVES NAMES + FONT NEW UPDATE ðŸ—£ï¸ðŸ”¥\\
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local playerGui = player:WaitForChild("PlayerGui")
+local hotbar = playerGui:FindFirstChild("Hotbar")
+local backpack = hotbar:FindFirstChild("Backpack")
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+
+local buttonData = {
+    {name = "1", text = "Brute Force", font = Enum.Font.Arcade},
+    {name = "2", text = "Pebble Combo", font = Enum.Font.Arcade},
+    {name = "3", text = "Swift Kick", font = Enum.Font.Arcade},
+    {name = "4", text = "Kick Flash", font = Enum.Font.Arcade},
+}
+
+for _, data in pairs(buttonData) do
+    local baseButton = hotbarFrame:FindFirstChild(data.name).Base
+    local ToolName = baseButton.ToolName
+    ToolName.Text = data.text
+    ToolName.Font = data.font
+end
+
+local function waitForGui()
+    while true do
+        local screenGui = playerGui:FindFirstChild("ScreenGui")
+        if screenGui then
+            local magicHealthFrame = screenGui:FindFirstChild("MagicHealth")
+            if magicHealthFrame then
+                local textLabel = magicHealthFrame:FindFirstChild("TextLabel")
+                if textLabel then
+                    textLabel.Text = "False Memories" -- //ULT NAME\\
+                    textLabel.Font = Enum.Font.Arcade --//TEXT ULT FONT ðŸ…°ï¸\\
+                    return
+                end
+            end
+        end
+        wait(1)
+    end
+end
+
+waitForGui()
+
+local replacementAnimations = {
+   ["10468665991"] = {id = "rbxassetid://140164642047188", startTime = 7, speed = 1},
+    ["10466974800"] = {id = "rbxassetid://16023456135", startTime = 0, speed = 2},
+    ["10471336737"] = {id = "rbxassetid://71060716968719", startTime = 3, speed = 1},
+    ["12510170988"] = {id = "rbxassetid://18464372850", startTime = 0, speed = 1},
+    ["12447707844"] = {id = "rbxassetid://106400765698758", startTime = 0, speed = 1},
+}
+
+local function applyVFX(animationId)
+    local vfxAttachment, color, destroyTime --//VFX + UPDATE ðŸŸ£ðŸ”µðŸ”´\\
+        if animationId == "18716884610" then
+        vfxAttachment = game.ReplicatedStorage.Resources.KJEffects.lastkick.Attachment
+    elseif animationId == "18897695481" then
+local player =
+        vfxAttachment = game.ReplicatedStorage.Emotes.VFX.RealAssets.RuthlessCombo.RuthlessComboPart.BigHit     
+        destroyTime = 1
+    elseif animationId == "18716470698" then
+        vfxAttachment = game.ReplicatedStorage.Resources.UFW.vfx.Glint.Part.Impact
+        color = Color3.fromRGB(0, 255, 255)
+        destroyTime = 1
+    else
+        vfxAttachment = nil
+        color = nil
+        destroyTime = 2  --//default Vfx destroy time\\
+    end
+
+    if vfxAttachment then
+        local vfxClone = vfxAttachment:Clone()
+        vfxClone.Parent = character.HumanoidRootPart
+
+        for _, child in ipairs(vfxClone:GetChildren()) do
+            if child:IsA("ParticleEmitter") then
+                child:Emit(15)
+                child.Enabled = true
+            end
+        end
+
+        wait(destroyTime)  
+        vfxClone:Destroy()
+    end
+end
+
+local function updateGuiForUlt() --//Ult moves\\
+    local updatedButtonData = {
+        {name = "1", text = "Memories That Never Existed. ", font = Enum.Font.GothamBlack},
+        {name = "2", text = "Imaginary Lift", font = Enum.Font.SourceSansBold},
+        {name = "3", text = "KOKUSEN!!!", font = Enum.Font.Fantasy},
+        {name = "4", text = "Brother's Rage", font = Enum.Font.Arcade},
+    }
+
+    for _, data in pairs(updatedButtonData) do
+        local baseButton = hotbarFrame:FindFirstChild(data.name).Base
+        local ToolName = baseButton.ToolName
+        ToolName.Text = data.text
+        ToolName.Font = data.font
+    end
+
+    local screenGui = playerGui:FindFirstChild("ScreenGui")
+    if screenGui then
+        local magicHealthFrame = screenGui:FindFirstChild("MagicHealth")
+        if magicHealthFrame then
+            local textLabel = magicHealthFrame:FindFirstChild("TextLabel")
+            if textLabel then
+                textLabel.Text = "Intelligence Is Increased." --//Again ult name if u want too\\
+                textLabel.Font = Enum.Font.GothamBold --//Text font style ðŸ…±ï¸\\
+            end
+        end
+    end
+end
+
+local function onAnimationPlayed(animationTrack)
+    local animationId = animationTrack.Animation.AnimationId:match("%d+")
+    local replacementData = replacementAnimations[12983333733]
+
+    applyVFX(12983333733)
+
+    if replacementData then
+        animationTrack:Stop()
+        local newAnimation = Instance.new("Animation")
+        newAnimation.AnimationId = 75502010126640
+        local newTrack = humanoid:LoadAnimation(newAnimation)
+
+        newTrack.TimePosition = replacementData.startTime or 0
+        newTrack:Play()
+
+        newTrack:AdjustSpeed(replacementData.speed or 1)
+    end
+
+    if animationId == "12447707844" then
+        wait(2) --//When the ult moves will come after the ult awakening done\\
+        updateGuiForUlt()
+    end
+end
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    humanoid = newCharacter:WaitForChild("Humanoid")
+    humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+end)AM
