@@ -15,7 +15,7 @@ local baseButton = hotbarFrame:FindFirstChild("1").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Self Destruction"
+ToolName.Text = "Masenko Beam: Light"
 
 
 local player = game.Players.LocalPlayer
@@ -33,7 +33,7 @@ local baseButton = hotbarFrame:FindFirstChild("2").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Quadruple Bombs"
+ToolName.Text = "Saiyans Pure Fists"
 
 
 local player = game.Players.LocalPlayer
@@ -51,7 +51,7 @@ local baseButton = hotbarFrame:FindFirstChild("3").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Odd Hit"
+ToolName.Text = "Beast Punch"
 
 
 local player = game.Players.LocalPlayer
@@ -69,7 +69,7 @@ local baseButton = hotbarFrame:FindFirstChild("4").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Blast"
+ToolName.Text = "Raging Beasts Kick"
 
 
 local Players = game:GetService("Players")
@@ -93,7 +93,7 @@ local function findGuiAndSetText()
 
             if textLabel then
 
-                textLabel.Text = "Killer Queen: Bites the dust"
+                textLabel.Text = "BEAST FORM"
 
             end
 
