@@ -15,7 +15,7 @@ local baseButton = hotbarFrame:FindFirstChild("1").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Masenko Beam: Light"
+ToolName.Text = "Special Beam Cannon"
 
 
 local player = game.Players.LocalPlayer
@@ -155,58 +155,52 @@ Anim:AdjustSpeed(0.1)
 
 Anim.TimePosition = startTime
 
-Anim:AdjustSpeed(2.0)
+Anim:AdjustSpeed(0.3)
 
-local Test = game.ReplicatedStorage.Resources.Cannon.Explo.Explo.Middle
-local test = Test:Clone()
-test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-
-for _, child in ipairs(test:GetChildren()) do
-    if child:IsA("ParticleEmitter") then
-        child:Emit(15)
-        child.Enabled = true
+local assetId = 102185762902096 -- Dismantle UNGROUP Effect asset ID
+local soundId = "rbxassetid://8899285496" -- Sound ID (replace if needed)
+ 
+-- Load the effect (Folder)
+local effect = game:GetObjects("rbxassetid://" .. assetId)[1]
+ 
+-- Create and play sound
+local sound = Instance.new("Sound")
+sound.SoundId = soundId
+sound.Parent = game.Workspace
+sound:Play()
+ 
+-- Ensure the effect was loaded properly
+if effect then
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        -- Wait for character parts to be loaded
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+ 
+        if humanoidRootPart then
+            -- Parent the effect to the workspace
+            effect.Parent = game.Workspace
+ 
+            -- Calculate the position in front of the player
+            local forwardOffset = 5 -- Adjust this value to change the distance in front of the player
+            local targetPosition = humanoidRootPart.CFrame * CFrame.new(0, 0, 0)
+ 
+            -- Iterate through all parts in the folder and position them
+            for _, part in pairs(effect:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false -- Disable collision
+                    part.Anchored = true    -- Anchor parts to keep them in place
+                    -- Set each part's position relative to the player's humanoid root part
+                    part.CFrame = targetPosition
+                end
+            end
+ 
+            -- Wait for 1 second before destroying the effect
+            wait(3)
+ 
+            -- Destroy the effect
+            effect:Destroy()
+        end
     end
-end
-task.wait(0.5)
-
-        test:Destroy()
-local Test =  game.ReplicatedStorage.Resources.Cannon.Maybe.Maybe.Big
-
-local test = Test:Clone()
-test.Parent = game.Players.LocalPlayer.Character["HumanoidRootPart"]
-
-
-for _, child in ipairs(test:GetChildren()) do
-    if child:IsA("ParticleEmitter") then
-        
-        child.Color = ColorSequence.new(Color3.new(255, 0, 0))
-        child:Emit(15)
-        child.Enabled = true
-    end
-end
-task.wait(0.4)
-
-        test:Destroy()
-local Test = game.ReplicatedStorage.Resources.FinalEffects.LaunchEffects.Angled.Center
-local test = Test:Clone()
-test.Parent = game.Players.LocalPlayer.Character["HumanoidRootPart"]
-
-
-for _, child in ipairs(test:GetChildren()) do
-    if child:IsA("ParticleEmitter") then
-        
-
-        child:Emit(15)
-        child.Enabled = true
-    end
-end
-task.wait(0.3)
-
-        test:Destroy()
-
-
-    end
-
 end
 
 --[[END OF MOVE 1 ANIM]]
